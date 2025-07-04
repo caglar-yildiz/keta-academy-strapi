@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+      POSTGRES_DB: strapi
+    ports:
+      - '5433:5432'
+    volumes:
+      - keta_academy_strapi_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  keta_academy_strapi_postgres_data: 

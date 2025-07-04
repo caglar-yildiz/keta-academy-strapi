@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_course_progresses",
+  "info": {
+    "singularName": "user-course-progress",
+    "pluralName": "user-course-progresses",
+    "displayName": "UserCourseProgress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_course_progresses"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::course.course",
+      "inversedBy": "user_course_progresses"
+    },
+    "course_status": {
+      "type": "enumeration",
+      "default": "not_started",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ]
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "kind": "collectionType",
+  "collectionName": "unit_progresses",
+  "info": {
+    "singularName": "unit-progress",
+    "pluralName": "unit-progresses",
+    "displayName": "UnitProgress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "unit": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::unit.unit",
+      "inversedBy": "unit_progresses"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "unit_progresses"
+    },
+    "unit_status": {
+      "type": "enumeration",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ]
+    }
+  }
+}

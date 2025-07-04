@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quiz_progresses",
+  "info": {
+    "singularName": "quiz-progress",
+    "pluralName": "quiz-progresses",
+    "displayName": "QuizProgress"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "quiz_progresses"
+    },
+    "quiz": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::quiz.quiz",
+      "inversedBy": "quiz_progresses"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "quiz_status": {
+      "type": "enumeration",
+      "enum": [
+        "not_started",
+        "in_progress",
+        "completed"
+      ]
+    }
+  }
+}
