@@ -31,17 +31,41 @@
     "duration": {
       "type": "integer"
     },
-    "units": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::unit.unit",
-      "mappedBy": "course"
-    },
     "user_course_progresses": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-course-progress.user-course-progress",
       "mappedBy": "course"
+    },
+    "subject": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::subject.subject",
+      "inversedBy": "courses"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "component",
+      "component": "shared.icon",
+      "repeatable": false
+    },
+    "course_lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course-lesson.course-lesson",
+      "mappedBy": "course"
+    },
+    "grades": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::grade.grade",
+      "inversedBy": "courses"
+    },
+    "isPopular": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

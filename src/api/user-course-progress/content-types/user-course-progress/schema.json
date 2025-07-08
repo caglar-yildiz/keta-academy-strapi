@@ -4,7 +4,7 @@
   "info": {
     "singularName": "user-course-progress",
     "pluralName": "user-course-progresses",
-    "displayName": "UserCourseProgress"
+    "displayName": "CourseProgress"
   },
   "options": {
     "draftAndPublish": false

@@ -13,6 +13,36 @@ export interface SharedAnswerOption extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedIcon extends Struct.ComponentSchema {
+  collectionName: 'components_shared_icons';
+  info: {
+    displayName: 'icon';
+  };
+  attributes: {
+    name: Schema.Attribute.Enumeration<
+      [
+        'math',
+        'physics',
+        'chemistry',
+        'biology',
+        'science',
+        'coding',
+        'programming',
+        'literature',
+        'english',
+        'history',
+        'geography',
+        'art',
+        'music',
+        'health',
+        'social',
+        'technology',
+      ]
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface SharedQuestion extends Struct.ComponentSchema {
   collectionName: 'components_shared_questions';
   info: {
@@ -45,6 +75,7 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'shared.answer-option': SharedAnswerOption;
+      'shared.icon': SharedIcon;
       'shared.question': SharedQuestion;
       'shared.social-link': SharedSocialLink;
     }

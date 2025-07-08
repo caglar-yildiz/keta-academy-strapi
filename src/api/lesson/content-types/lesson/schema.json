@@ -24,9 +24,6 @@
       "type": "string",
       "required": true
     },
-    "order": {
-      "type": "integer"
-    },
     "quiz": {
       "type": "relation",
       "relation": "manyToOne",
@@ -37,6 +34,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::lesson-progress.lesson-progress",
+      "mappedBy": "lesson"
+    },
+    "course_lessons": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::course-lesson.course-lesson",
       "mappedBy": "lesson"
     }
   }

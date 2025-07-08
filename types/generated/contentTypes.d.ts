@@ -404,6 +404,37 @@ export interface ApiContactPageContactPage extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiCourseLessonCourseLesson
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'course_lessons';
+  info: {
+    displayName: 'Course Lesson';
+    pluralName: 'course-lessons';
+    singularName: 'course-lesson';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    lesson: Schema.Attribute.Relation<'manyToOne', 'api::lesson.lesson'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::course-lesson.course-lesson'
+    > &
+      Schema.Attribute.Private;
+    order: Schema.Attribute.Integer & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   collectionName: 'courses';
   info: {
@@ -415,11 +446,18 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    course_lessons: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::course-lesson.course-lesson'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.String & Schema.Attribute.Required;
     duration: Schema.Attribute.Integer;
+    grades: Schema.Attribute.Relation<'manyToMany', 'api::grade.grade'>;
+    icon: Schema.Attribute.Component<'shared.icon', false>;
+    isPopular: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -427,11 +465,12 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String;
+    subject: Schema.Attribute.Relation<'manyToOne', 'api::subject.subject'>;
     thumbnail: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    units: Schema.Attribute.Relation<'oneToMany', 'api::unit.unit'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -439,6 +478,38 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-course-progress.user-course-progress'
     >;
+  };
+}
+
+export interface ApiGradeGrade extends Struct.CollectionTypeSchema {
+  collectionName: 'grades';
+  info: {
+    displayName: 'Grade';
+    pluralName: 'grades';
+    singularName: 'grade';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    courses: Schema.Attribute.Relation<'manyToMany', 'api::course.course'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::grade.grade'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    order: Schema.Attribute.Integer;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -487,6 +558,10 @@ export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    course_lessons: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::course-lesson.course-lesson'
+    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -501,7 +576,6 @@ export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
       'api::lesson.lesson'
     > &
       Schema.Attribute.Private;
-    order: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
     quiz: Schema.Attribute.Relation<'manyToOne', 'api::quiz.quiz'>;
     title: Schema.Attribute.String &
@@ -615,70 +689,36 @@ export interface ApiSettingSetting extends Struct.SingleTypeSchema {
   };
 }
 
-export interface ApiUnitProgressUnitProgress
-  extends Struct.CollectionTypeSchema {
-  collectionName: 'unit_progresses';
+export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
+  collectionName: 'subjects';
   info: {
-    displayName: 'UnitProgress';
-    pluralName: 'unit-progresses';
-    singularName: 'unit-progress';
+    displayName: 'Subject';
+    pluralName: 'subjects';
+    singularName: 'subject';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
+    courses: Schema.Attribute.Relation<'oneToMany', 'api::course.course'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    description: Schema.Attribute.String & Schema.Attribute.Required;
+    icon: Schema.Attribute.Component<'shared.icon', false>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::unit-progress.unit-progress'
+      'api::subject.subject'
     > &
       Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    unit: Schema.Attribute.Relation<'manyToOne', 'api::unit.unit'>;
-    unit_status: Schema.Attribute.Enumeration<
-      ['not_started', 'in_progress', 'completed']
-    >;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    users_permissions_user: Schema.Attribute.Relation<
-      'manyToOne',
-      'plugin::users-permissions.user'
-    >;
-  };
-}
-
-export interface ApiUnitUnit extends Struct.CollectionTypeSchema {
-  collectionName: 'units';
-  info: {
-    displayName: 'Unit';
-    pluralName: 'units';
-    singularName: 'unit';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    course: Schema.Attribute.Relation<'manyToOne', 'api::course.course'>;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    description: Schema.Attribute.Text & Schema.Attribute.Required;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<'oneToMany', 'api::unit.unit'> &
-      Schema.Attribute.Private;
-    order: Schema.Attribute.Integer & Schema.Attribute.Required;
-    publishedAt: Schema.Attribute.DateTime;
-    title: Schema.Attribute.String &
+    name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    unit_progresses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::unit-progress.unit-progress'
-    >;
+    publishedAt: Schema.Attribute.DateTime;
+    slug: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -689,7 +729,7 @@ export interface ApiUserCourseProgressUserCourseProgress
   extends Struct.CollectionTypeSchema {
   collectionName: 'user_course_progresses';
   info: {
-    displayName: 'UserCourseProgress';
+    displayName: 'CourseProgress';
     pluralName: 'user-course-progresses';
     singularName: 'user-course-progress';
   };
@@ -1254,10 +1294,6 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    unit_progresses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::unit-progress.unit-progress'
-    >;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1285,14 +1321,15 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::contact-page.contact-page': ApiContactPageContactPage;
+      'api::course-lesson.course-lesson': ApiCourseLessonCourseLesson;
       'api::course.course': ApiCourseCourse;
+      'api::grade.grade': ApiGradeGrade;
       'api::lesson-progress.lesson-progress': ApiLessonProgressLessonProgress;
       'api::lesson.lesson': ApiLessonLesson;
       'api::quiz-progress.quiz-progress': ApiQuizProgressQuizProgress;
       'api::quiz.quiz': ApiQuizQuiz;
       'api::setting.setting': ApiSettingSetting;
-      'api::unit-progress.unit-progress': ApiUnitProgressUnitProgress;
-      'api::unit.unit': ApiUnitUnit;
+      'api::subject.subject': ApiSubjectSubject;
       'api::user-course-progress.user-course-progress': ApiUserCourseProgressUserCourseProgress;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

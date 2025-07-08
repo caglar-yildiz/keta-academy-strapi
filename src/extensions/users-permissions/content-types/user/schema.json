@@ -83,12 +83,6 @@
       "relation": "oneToMany",
       "target": "api::quiz-progress.quiz-progress",
       "mappedBy": "users_permissions_user"
-    },
-    "unit_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::unit-progress.unit-progress",
-      "mappedBy": "users_permissions_user"
     }
   }
 }
