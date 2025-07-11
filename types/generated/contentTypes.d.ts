@@ -588,6 +588,34 @@ export interface ApiLessonLesson extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiPrivacyPolicyPrivacyPolicy extends Struct.SingleTypeSchema {
+  collectionName: 'privacy_policies';
+  info: {
+    displayName: 'Privacy Policy';
+    pluralName: 'privacy-policies';
+    singularName: 'privacy-policy';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::privacy-policy.privacy-policy'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.Blocks;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiQuizProgressQuizProgress
   extends Struct.CollectionTypeSchema {
   collectionName: 'quiz_progresses';
@@ -719,6 +747,35 @@ export interface ApiSubjectSubject extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTermAndConditionTermAndCondition
+  extends Struct.SingleTypeSchema {
+  collectionName: 'term_and_conditions';
+  info: {
+    displayName: 'Term And Condition';
+    pluralName: 'term-and-conditions';
+    singularName: 'term-and-condition';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::term-and-condition.term-and-condition'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    text: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1326,10 +1383,12 @@ declare module '@strapi/strapi' {
       'api::grade.grade': ApiGradeGrade;
       'api::lesson-progress.lesson-progress': ApiLessonProgressLessonProgress;
       'api::lesson.lesson': ApiLessonLesson;
+      'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;
       'api::quiz-progress.quiz-progress': ApiQuizProgressQuizProgress;
       'api::quiz.quiz': ApiQuizQuiz;
       'api::setting.setting': ApiSettingSetting;
       'api::subject.subject': ApiSubjectSubject;
+      'api::term-and-condition.term-and-condition': ApiTermAndConditionTermAndCondition;
       'api::user-course-progress.user-course-progress': ApiUserCourseProgressUserCourseProgress;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
