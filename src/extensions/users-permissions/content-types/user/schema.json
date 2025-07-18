@@ -65,24 +65,6 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
-    },
-    "user_course_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-course-progress.user-course-progress",
-      "mappedBy": "user"
-    },
-    "lesson_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lesson-progress.lesson-progress",
-      "mappedBy": "users_permissions_user"
-    },
-    "quiz_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::quiz-progress.quiz-progress",
-      "mappedBy": "users_permissions_user"
     }
   }
 }

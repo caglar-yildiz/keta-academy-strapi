@@ -31,12 +31,6 @@
     "duration": {
       "type": "integer"
     },
-    "user_course_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-course-progress.user-course-progress",
-      "mappedBy": "course"
-    },
     "subject": {
       "type": "relation",
       "relation": "manyToOne",

@@ -28,12 +28,6 @@
       "type": "component",
       "component": "shared.question",
       "repeatable": true
-    },
-    "quiz_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::quiz-progress.quiz-progress",
-      "mappedBy": "quiz"
     }
   }
 }

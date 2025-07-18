@@ -11,18 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "user_course_progresses"
-    },
-    "course": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::course.course",
-      "inversedBy": "user_course_progresses"
-    },
     "course_status": {
       "type": "enumeration",
       "default": "not_started",
@@ -31,6 +19,11 @@
         "in_progress",
         "completed"
       ]
+    },
+    "user_plus_course_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

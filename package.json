@@ -26,7 +26,9 @@
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
     "strapi-plugin-slugify": "^2.3.8",
-    "styled-components": "^6.0.0"
+    "styled-components": "^6.0.0",
+    "googleapis": "^152.0.0",
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "@types/node": "^20",

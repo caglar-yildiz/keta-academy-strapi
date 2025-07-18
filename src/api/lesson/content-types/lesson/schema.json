@@ -30,17 +30,15 @@
       "target": "api::quiz.quiz",
       "inversedBy": "lessons"
     },
-    "lesson_progresses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::lesson-progress.lesson-progress",
-      "mappedBy": "lesson"
-    },
     "course_lessons": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::course-lesson.course-lesson",
       "mappedBy": "lesson"
+    },
+    "slug": {
+      "type": "string",
+      "required": true
     }
   }
 }

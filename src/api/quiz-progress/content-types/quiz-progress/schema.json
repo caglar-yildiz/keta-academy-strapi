@@ -11,18 +11,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "quiz_progresses"
-    },
-    "quiz": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::quiz.quiz",
-      "inversedBy": "quiz_progresses"
-    },
     "score": {
       "type": "integer"
     },
@@ -33,6 +21,11 @@
         "in_progress",
         "completed"
       ]
+    },
+    "user_plus_quiz_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }

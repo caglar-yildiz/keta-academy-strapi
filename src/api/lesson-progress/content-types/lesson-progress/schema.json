@@ -11,21 +11,14 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "users_permissions_user": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
-      "inversedBy": "lesson_progresses"
-    },
-    "lesson": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::lesson.lesson",
-      "inversedBy": "lesson_progresses"
-    },
     "isCompleted": {
       "type": "boolean",
       "default": false
+    },
+    "user_plus_lesson_id": {
+      "type": "string",
+      "required": true,
+      "unique": true
     }
   }
 }
