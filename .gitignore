@@ -129,3 +129,17 @@ dist
 build
 .strapi-updater.json
 .strapi-cloud.json
+
+############################
+# Generated documentation files
+############################
+
+src/extensions/documentation/public/index.html
+src/extensions/documentation/documentation/1.0.0/full_documentation.json
+
+############################
+# Generated TypeScript types
+############################
+
+types/generated/contentTypes.d.ts
+types/generated/components.d.ts
