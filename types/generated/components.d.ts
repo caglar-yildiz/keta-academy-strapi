@@ -44,7 +44,6 @@ export interface SeoSeo extends Struct.ComponentSchema {
     metaDescription: Schema.Attribute.String & Schema.Attribute.Required;
     metaImage: Schema.Attribute.Media<'images'>;
     metaTitle: Schema.Attribute.String & Schema.Attribute.Required;
-    socialMedia: Schema.Attribute.Component<'seo.social-media', true>;
   };
 }
 

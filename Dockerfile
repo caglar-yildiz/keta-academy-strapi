@@ -1,5 +1,7 @@
 # Stage 1: build the app
-FROM node:18-alpine as build
+FROM node:20-alpine as build
+
+RUN npm install -g npm@latest
 
 WORKDIR /app
 
@@ -10,7 +12,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: run the app
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 

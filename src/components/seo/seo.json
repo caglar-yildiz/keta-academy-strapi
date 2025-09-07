@@ -23,11 +23,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "socialMedia": {
-      "type": "component",
-      "component": "seo.social-media",
-      "repeatable": true
     }
   },
   "config": {}
