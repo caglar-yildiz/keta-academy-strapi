@@ -197,4 +197,8 @@ Once the server is running, you can access:
 
 ---
 
+## Vulnerabilities
+
+41 (22 low, 8 moderate, 11 high)
+
 <sub>🎓 Built with ❤️ for Keta Academy</sub>
