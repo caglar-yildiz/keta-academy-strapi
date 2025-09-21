@@ -37,6 +37,13 @@
       "relation": "oneToOne",
       "target": "api::admission-score.admission-score",
       "mappedBy": "university"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

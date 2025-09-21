@@ -60,6 +60,13 @@
     "isPopular": {
       "type": "boolean",
       "default": false
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

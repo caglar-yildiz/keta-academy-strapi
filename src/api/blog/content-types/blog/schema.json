@@ -39,6 +39,23 @@
       "type": "component",
       "component": "seo.seo",
       "repeatable": false
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Lise",
+        "Üniversite",
+        "Mezun",
+        "Doktora",
+        "Üniversite Hazırlık"
+      ]
     }
   }
 }
